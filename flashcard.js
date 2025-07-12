@@ -182,7 +182,6 @@ const flashcards = [
 let current = 0;
 let revealed = false;
 
-
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'theme-change' && (event.data.theme === 'dark' || event.data.theme === 'light')) {
     document.documentElement.setAttribute('data-theme', event.data.theme);
@@ -254,7 +253,7 @@ searchInput.addEventListener('keydown', (e) => {
         article: '❌',
         word: 'Not Found',
         plural: '',
-        meaning: 'Please contact the admin.',
+        meaning: 'Please contact Anurodh',
         isNotFound: true,
       };
         // Shuffle real cards and prepend this one
