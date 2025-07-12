@@ -1,0 +1,275 @@
+/* style.css */
+:root {
+  --head: #003366; 
+  --bg: #f5f9fc;
+  --bg1: #528663;
+  --text: #222;
+  --card: #ffffff;
+  --primary: #003366;
+  --accent: #f5de9b;
+  --hover: #b1afaf;
+}
+
+[data-theme="dark"] {
+  --head: #f6a440;
+  --bg: #121212;
+  --text: #eeeeee;
+  --card: #1e1e1e;
+  --primary: #25373f;
+  --accent: #f5de9b;
+  --hover: #373737;
+}
+
+
+/* General body and text styles */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  background-color: var(--bg);   /* changed */
+  color: var(--text);            /* changed */
+}
+
+/* Headings */
+h1, h2, h3 {
+  color: var(--head);
+}
+
+h2 {
+  border-bottom: 2px solid #003366;
+  padding-bottom: 5px;
+  margin-top: 40px;
+}
+
+/* Navigation Bar */
+nav#navbar {
+  background-color: var(--primary); /* changed */
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav#navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+nav#navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav#navbar a:hover,
+nav#navbar a:focus {
+  color: var(--hover);  /* changed */
+  text-decoration: underline;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: var(--card);
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+  color: var(--text);
+}
+
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* Lists */
+ul.list-disc {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: var(--text);
+}
+
+.exercise {
+  background-color: var(--card);
+  border-left: 5px solid var(--primary);
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-style: italic;
+  color: var(--text);
+}
+
+/* Hide elements with this class */
+.hidden {
+  display: none;
+}
+
+/* Overview landing page container */
+.section-overview {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text);
+}
+
+/* Cards container: flexible grid */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Individual clickable cards */
+.card {
+  background: var(--card);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 20px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1 1 200px;
+  max-width: 250px;
+  font-weight: bold;
+  color: var(--text);
+  user-select: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  display: flex;              /* Center vertically and horizontally */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card:hover {
+  background-color: var(--hover);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Style for detailed content sections */
+.content-section {
+  padding: 20px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: var(--card);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  color: var(--text);
+}
+
+.content-section table {
+  width: 100%;           /* Table fills the container’s width */
+  max-width: 100%;       /* Doesn’t exceed container */
+  table-layout: fixed;   /* Fix column widths, avoid auto resizing */
+}
+
+.content-section th,
+.content-section td {
+  white-space: nowrap;   /* Prevents line breaks inside cells */
+  overflow: hidden;      /* Hides overflow content instead of wrapping */
+  font-size: clamp(10px, 1vw, 20px); /* Responsive font size, stays readable */
+  padding: 6px 8px;      /* Tight but clear padding */
+}
+
+
+/* Back button style */
+.back-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-weight: bold;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+.back-btn:hover {
+  background-color: #354e68;
+}
+.top-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Flashcard toggle button (same look as theme toggle) */
+#flashcard-toggle {
+  margin-bottom: 16px;
+  background: var(--card);
+  color: var(--text);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.5s, color 0.5s;
+}
+
+#flashcard-toggle:hover {
+  background-color: var(--hover)
+}
+
+#theme-toggle {
+  margin-bottom: 16px;
+  background: var(--card);
+  color: var(--text);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.5s, color 0.5s;
+}
+#theme-toggle:hover{
+  background-color: var(--hover)
+}
+
+/*---flashcards---*/
+
+
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+  nav#navbar ul {
+    flex-direction: column;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  button, .card {
+    touch-action: manipulation;
+    font-size: 16px;
+  }
+
+  .cards-container {
+    flex-direction: column;
+  }
+
+  .card {
+    max-width: 100%;
+    font-size: 1.5rem;        /* Responsive size */
+    
+  }
+}

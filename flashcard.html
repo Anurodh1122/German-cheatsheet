@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>German A1 Flashcards</title>
+
+  <!-- iOS standalone fullscreen -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="German A1 Flashcards" />
+
+  <!-- Apple touch icons for light and dark mode -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" media="(prefers-color-scheme: light)">
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="flashcard.css" />
+</head>
+<body>
+
+  <div style="text-align:center; margin: 1rem 0;">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search word..."
+      style="padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px; width: 80%; max-width: 300px;"
+    />
+  </div>
+
+
+  <div id="card-container">
+    <div id="card" tabindex="0" role="button" aria-pressed="false" aria-label="Flashcard. Tap to flip.">
+      <div class="card-front" id="card-front">Tap to Start</div>
+      <div class="card-back" id="card-back"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin: 1rem 0;">
+    <button id="difficult-btn" type="button" aria-pressed="false" style="padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px; cursor: pointer;">
+      Mark
+    </button>
+  </div>
+
+  <!-- Link external JS -->
+  <script src="flashcard.js"></script>
+</body>
+</html>
