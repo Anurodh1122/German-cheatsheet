@@ -38,7 +38,7 @@ body {
   perspective: 1200px;
   width: 90vw;
   max-width: 500px;
-  height: 60vh;
+  height: 50vh;
   flex-shrink: 0;
 }
 
@@ -52,7 +52,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 2.5em;
+  font-size: 2em;
   padding: 20px;
   cursor: pointer;
   user-select: none;
@@ -96,6 +96,26 @@ body {
 
 .card-color-das {
   border: 4px solid #33cc33;  /* Green border for "das" */
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  #card {
+    height: 45vh;       /* Smaller height */
+    font-size: 1.6em;   /* Smaller font size */
+    padding: 12px 15px; /* Reduced padding */
+    border-radius: 36px; /* Slightly smaller rounded corners */
+  }
+
+  #card-front,
+  #card-back {
+    padding: 12px 15px;
+  }
+
+  #search-input {
+    width: 95%;
+    max-width: none;
+  }
 }
 
 /* --- Search box --- */
