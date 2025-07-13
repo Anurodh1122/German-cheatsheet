@@ -101,7 +101,7 @@ body {
 /* Mobile styles */
 @media (max-width: 480px) {
   #card {
-    height: 45vh;       /* Smaller height */
+    height: 35vh;       /* Smaller height */
     font-size: 1.6em;   /* Smaller font size */
     padding: 12px 15px; /* Reduced padding */
     border-radius: 36px; /* Slightly smaller rounded corners */
