@@ -36,10 +36,16 @@
   </div>
 
   <div style="text-align:center; margin: 1rem 0;">
-    <button id="difficult-btn" type="button" aria-pressed="false" style="padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px; cursor: pointer;">
-      Mark
-    </button>
+    <label class="switch">
+      <input type="checkbox" id="difficult-toggle" onchange="toggleMark(currentCard.word)">
+      <span class="slider round"></span>
+    </label>
   </div>
+
+  <img id="reset-icon" src="arrow.png" alt="Reset marked" title="Reset marked words" class="reset-icon">
+
+
+
 
   <!-- Link external JS -->
   <script src="flashcard.js"></script>

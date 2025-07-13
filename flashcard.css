@@ -34,28 +34,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Keep vertical layout, space between button and card */
-/*#theme-toggle {
-  margin-bottom: 20px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 30px;
-  font-size: 1em;
-  cursor: pointer;
-  user-select: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  transition: background 0.5s, color 0.5s;
-  max-width: 320px;
-  width: 90vw;
-  flex-shrink: 0;
-}*/
-#theme-toggle:focus {
-  outline: 2px solid #2684ff;
-  outline-offset: 2px;
-}
-
 #card-container {
   perspective: 1200px;
   width: 90vw;
@@ -147,36 +125,69 @@ body {
   box-shadow: 0 0 8px rgba(0, 122, 255, 0.5);
 }
 
-#difficult-btn {
-  padding: 0.6rem 1.4rem;
-  font-size: 1rem;
-  border-radius: 10px;
-  border: none;
+/* Toggle Switch for Marking Difficult */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
   cursor: pointer;
-  user-select: none;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  top: 0; left: 0; right: 0; bottom: 0;
+   background-color: var(--button-bg);
+  transition: background-color 0.3s ease;
+  border-radius: 34px;
 }
 
-/* Hover and active normal */
-#difficult-btn:hover {
-  filter: brightness(0.9);
-}
-#difficult-btn:active {
-  filter: brightness(0.8);
-}
-
-/* When marked as difficult */
-#difficult-btn.marked {
-  background-color: #28a745; /* green */
-  color: white;
-  box-shadow: 0 0 8px 2px #28a745;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--bg);
+  transition: transform 0.6s ease, background-color 0.3s ease;
+  border-radius: 50%;
 }
 
-#difficult-btn.marked:hover {
-  filter: brightness(1.1);
+input:checked + .slider {
+  background-color: #33cc33;
 }
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+.reset-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  cursor: pointer;
+  transition: transform 1s ease;
+  filter: var(--icon-filter, none);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(180deg); }
+}
+
+.reset-icon.rotate {
+  animation: spin 0.6s ease-in-out forwards;
+}
+
+
+
+
 
 

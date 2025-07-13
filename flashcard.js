@@ -179,15 +179,55 @@ const flashcards = [
   { article: "das", word: "Rad", plural: "Räder", meaning: "Wheel" },
   { article: "das", word: "Benzin", plural: "Benzine", meaning: "Gasoline" },
 ];
+// ========== 1. Global State ==========
 let current = 0;
 let revealed = false;
+// ========== 2. DOM References ==========
+const card = document.getElementById('card');
+const cardFront = document.getElementById('card-front');
+const cardBack = document.getElementById('card-back');
+const searchInput = document.getElementById('search-input');
 
+// ========== 3. Initialization ==========
 window.addEventListener('message', (event) => {
   if (event.data?.type === 'theme-change' && (event.data.theme === 'dark' || event.data.theme === 'light')) {
     document.documentElement.setAttribute('data-theme', event.data.theme);
   }
 });
 
+// Set up default values for each flashcard
+flashcards.forEach(card => {
+  if (card.timesShown === undefined) card.timesShown = 0;
+  if (card.isDifficult === undefined) card.isDifficult = false;
+});
+
+// Load progress from localStorage
+function loadProgress() {
+  const saved = JSON.parse(localStorage.getItem('flashcardProgress') || '{}');
+  flashcards.forEach(card => {
+    if (saved[card.word]) {
+      card.timesShown = saved[card.word].timesShown || 0;
+      card.isDifficult = saved[card.word].isDifficult || false;
+    }
+  });
+}
+loadProgress();
+
+// Save progress to localStorage
+function saveProgress() {
+  const progress = {};
+  flashcards.forEach(card => {
+    progress[card.word] = {
+      timesShown: card.timesShown,
+      isDifficult: card.isDifficult,
+    };
+  });
+  localStorage.setItem('flashcardProgress', JSON.stringify(progress));
+}
+
+
+
+// Shuffle flashcards 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -196,29 +236,7 @@ function shuffle(array) {
 }
 shuffle(flashcards);
 
-const card = document.getElementById('card');
-const cardFront = document.getElementById('card-front');
-const cardBack = document.getElementById('card-back');
-const searchInput = document.getElementById('search-input');
-const difficultBtn = document.getElementById('difficult-btn');
-
-difficultBtn.addEventListener('click', () => {
-  const word = flashcards[current];
-  word.isDifficult = !word.isDifficult;
-  saveProgress();
-
-  // Toggle visual style
-  if (word.isDifficult) {
-    difficultBtn.classList.add('marked');
-  } else {
-    difficultBtn.classList.remove('marked');
-  }
-
-  updateDifficultButton?.();
-});
-
-
-
+// ========== 4. Search Feature ==========
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     const query = searchInput.value.trim().toLowerCase();
@@ -268,49 +286,46 @@ searchInput.addEventListener('keydown', (e) => {
   }
 });
 
-
-
-
-// Initialize tracking properties (if not present)
-flashcards.forEach(card => {
-  if (card.timesShown === undefined) card.timesShown = 0;
-  if (card.isDifficult === undefined) card.isDifficult = false;
-});
-
-function loadProgress() {
-  const saved = JSON.parse(localStorage.getItem('flashcardProgress') || '{}');
-  flashcards.forEach(card => {
-    if (saved[card.word]) {
-      card.timesShown = saved[card.word].timesShown || 0;
-      card.isDifficult = saved[card.word].isDifficult || false;
-    }
-  });
-}
-loadProgress();
-
-function saveProgress() {
-  const progress = {};
-  flashcards.forEach(card => {
-    progress[card.word] = {
-      timesShown: card.timesShown,
-      isDifficult: card.isDifficult,
-    };
-  });
-  localStorage.setItem('flashcardProgress', JSON.stringify(progress));
-}
-
-
-
+// ========== 5. Difficult Toggle Feature ==========
 function updateDifficultButton() {
-  const word = flashcards[current];
-  if (word.isDifficult) {
-    difficultBtn.classList.add('marked');
-  } else {
-    difficultBtn.classList.remove('marked');
+  const card = flashcards[current];
+  const toggle = document.getElementById('difficult-toggle');
+  if (toggle && card) {
+    toggle.checked = card.isDifficult;
   }
 }
 
+document.getElementById('reset-icon').addEventListener('click', () => {
+  // Clear all marked words
+  flashcards.forEach(card => {
+    card.isDifficult = false;
+  });
 
+  saveProgress();
+  updateDifficultButton();
+
+  // Animate the reset icon
+  const icon = document.getElementById('reset-icon');
+  icon.classList.add('rotate');
+
+  // Remove the animation class after it's done
+  setTimeout(() => {
+    icon.classList.remove('rotate');
+  }, 1000);
+});
+
+
+
+document.getElementById('difficult-toggle').addEventListener('change', () => {
+  const word = flashcards[current];
+  const toggle = document.getElementById('difficult-toggle');
+  if (word && toggle) {
+    word.isDifficult = toggle.checked;
+    saveProgress();
+  }
+});
+
+// ========== 6. Flashcard Display Logic ==========
 function applyCardColor(article) {
   card.classList.remove('card-color-der', 'card-color-die', 'card-color-das');
   if (article === 'der') {
@@ -329,7 +344,6 @@ function showFront() {
   card.setAttribute('aria-pressed', 'false');
   card.classList.remove('revealed');
   applyCardColor(word.article);
-
   updateDifficultButton();
 }
 
@@ -353,15 +367,16 @@ function showBack() {
   card.setAttribute('aria-pressed', 'true');
   card.classList.add('revealed');
   applyCardColor(word.article);
-
   updateDifficultButton();
 }
 
+// === 1. Tap / Click / Keyboard Handling ===
 function handleTap() {
   if (!revealed) {
     showBack();
     revealed = true;
   } else {
+    
     let nextIndex;
 
     if (Math.random() < 0.3) { // ~30% chance show a difficult card
@@ -383,8 +398,9 @@ function handleTap() {
   }
 }
 
-
+// Mouse click on card
 card.addEventListener('click', handleTap);
+// Keyboard accessibility (Enter / Space)
 card.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
