@@ -1,4 +1,4 @@
-const flashcards = [
+/*const flashcards = [
   { article: "die", word: "Schule", plural: "Schulen", meaning: "School" },
   { article: "die", word: "Blume", plural: "Blumen", meaning: "Flower" },
   { article: "der", word: "Tisch", plural: "Tische", meaning: "Table" },
@@ -178,15 +178,48 @@ const flashcards = [
   { article: "der", word: "Motor", plural: "Motoren", meaning: "Motor" },
   { article: "das", word: "Rad", plural: "Räder", meaning: "Wheel" },
   { article: "das", word: "Benzin", plural: "Benzine", meaning: "Gasoline" },
-];
+];*/
+
 // ========== 1. Global State ==========
 let current = 0;
 let revealed = false;
+const allFlashcards = flashcardTopics.flatMap(group => group.cards);
+let flashcards = [...allFlashcards]; // start with full deck by default
+
+
 // ========== 2. DOM References ==========
 const card = document.getElementById('card');
 const cardFront = document.getElementById('card-front');
 const cardBack = document.getElementById('card-back');
 const searchInput = document.getElementById('search-input');
+
+const filterToggleBtn = document.getElementById('filter-toggle');
+const topicFilterDiv = document.getElementById('topic-filter');
+const clearAllBtn = document.getElementById('clear-all-btn');
+const topicCheckboxes = topicFilterDiv.querySelectorAll('.checkbox-list input[type="checkbox"]');
+
+function updateFlashcardsByTopic() {
+  const selectedTopics = Array.from(document.querySelectorAll('#topic-filter input:checked'))
+    .map(cb => cb.value);
+
+  if (selectedTopics.length === 0) {
+    flashcards = [...allFlashcards]; // no filter, use all
+  } else {
+    // Filter cards whose topic matches any selected topic
+    flashcards = allFlashcards.filter(card => {
+      // find the topic group containing this card and check if topic matches
+      return selectedTopics.some(topic =>
+        flashcardTopics.find(group => group.topic === topic).cards.includes(card)
+      );
+    });
+  }
+
+  shuffle(flashcards);
+  current = 0;
+  revealed = false;
+  showFront();
+  updateDifficultButton();
+}
 
 // ========== 3. Initialization ==========
 window.addEventListener('message', (event) => {
@@ -204,19 +237,20 @@ flashcards.forEach(card => {
 // Load progress from localStorage
 function loadProgress() {
   const saved = JSON.parse(localStorage.getItem('flashcardProgress') || '{}');
-  flashcards.forEach(card => {
+  allFlashcards.forEach(card => {
     if (saved[card.word]) {
       card.timesShown = saved[card.word].timesShown || 0;
       card.isDifficult = saved[card.word].isDifficult || false;
     }
   });
 }
+
 loadProgress();
 
 // Save progress to localStorage
 function saveProgress() {
   const progress = {};
-  flashcards.forEach(card => {
+  allFlashcards.forEach(card => {
     progress[card.word] = {
       timesShown: card.timesShown,
       isDifficult: card.isDifficult,
@@ -281,8 +315,6 @@ searchInput.addEventListener('keydown', (e) => {
       revealed = true; // show already revealed
       showBack();
     }
-
-    //card.focus(); // ensure keyboard/tap works again
   }
 });
 
@@ -316,14 +348,21 @@ document.getElementById('reset-icon').addEventListener('click', () => {
 
 
 
-document.getElementById('difficult-toggle').addEventListener('change', () => {
-  const word = flashcards[current];
-  const toggle = document.getElementById('difficult-toggle');
-  if (word && toggle) {
-    word.isDifficult = toggle.checked;
-    saveProgress();
+document.getElementById('difficult-toggle').addEventListener('change', (event) => {
+  const currentCard = flashcards[current];
+  if (!currentCard) return;
+
+  currentCard.isDifficult = event.target.checked;
+
+  // Sync with allFlashcards
+  const globalCard = allFlashcards.find(c => c.word === currentCard.word);
+  if (globalCard) {
+    globalCard.isDifficult = currentCard.isDifficult;
   }
+
+  saveProgress();
 });
+
 
 // ========== 6. Flashcard Display Logic ==========
 function applyCardColor(article) {
@@ -426,6 +465,51 @@ document.addEventListener("touchend", function (e) {
 
 // Show first card front on load
 document.addEventListener('DOMContentLoaded', () => {
+  // Your existing init code, e.g.:
+  flashcards = [...allFlashcards];
+  loadProgress();
+  shuffle(flashcards);
+  current = 0;
+  revealed = false;
   showFront();
+
+  // NEW: Filter toggle button click
+  filterToggleBtn.addEventListener('click', () => {
+    const isCollapsed = topicFilterDiv.classList.toggle('collapsed');
+    filterToggleBtn.setAttribute('aria-expanded', !isCollapsed);
+    filterToggleBtn.textContent = (isCollapsed ? '🔽' : '🔼') + ' Filter by Topic';
+  });
+
+  // NEW: close filter if clicking outside filter area or button
+  document.addEventListener('click', (event) => {
+    const isClickInsideFilter = topicFilterDiv.contains(event.target);
+    const isClickOnButton = filterToggleBtn.contains(event.target);
+
+    if (!isClickInsideFilter && !isClickOnButton && !topicFilterDiv.classList.contains('collapsed')) {
+      // Close the dropdown
+      topicFilterDiv.classList.add('collapsed');
+      filterToggleBtn.setAttribute('aria-expanded', false);
+      filterToggleBtn.textContent = '🔽 Filter by Topic';
+    }
+  });
+
+  // Clear All button click: uncheck all and update
+  clearAllBtn.addEventListener('click', () => {
+    topicCheckboxes.forEach(cb => cb.checked = false);
+    updateFlashcardsByTopic();
+  });
+
+  // NEW: Individual topic checkbox changes
+  topicCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      updateFlashcardsByTopic();
+    });
+  });
+
+
+  // Initialize selectAll checkbox state on load
+  const allChecked = Array.from(topicCheckboxes).every(cb => cb.checked);
+  selectAllCheckbox.checked = allChecked;
 });
+
 
