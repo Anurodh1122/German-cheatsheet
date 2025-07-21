@@ -18,44 +18,38 @@
 </head>
 <body>
 
- <div id="filter-container">
-    <button id="filter-toggle" aria-expanded="false">🔽 Filter by Topic</button>
+  <div id="top-controls">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Wort suchen …"
+      />
 
-    <div id="topic-filter" class="collapsed">
-      <button id="clear-all-btn" type="button" aria-label="Clear all topic filters">Clear All</button>
+      <div id="filter-container">
+        <button id="filter-toggle" aria-expanded="false">🔽 Filter by Topic</button>
 
-      <div class="checkbox-list">
-        <label><input type="checkbox" value="👚 Kleidung"> Kleidung</label>
-        <label><input type="checkbox" value="🛋️ Möbel"> Möbel</label>
-        <label><input type="checkbox" value="⚽ Freizeitaktivitäten"> Freizeitaktivitäten</label>
-        <label><input type="checkbox" value="🏢 Büro"> Büro</label>
-        <label><input type="checkbox" value="💻 Computer"> Computer</label>
-        <label><input type="checkbox" value="🚗 Verkehrsmittel"> Verkehrsmittel</label>
-        <label><input type="checkbox" value="✈️ Reisen"> Reisen</label>
-        <label><input type="checkbox" value="🍏 Lebensmittel und Speisen"> Lebensmittel und Speisen</label>
-        <label><input type="checkbox" value="🦵 Körperteile"> Körperteile</label>
-        <label><input type="checkbox" value="👩‍🦰 Aussehen"> Aussehen</label>
-        <label><input type="checkbox" value="👤 Charakter"> Charakter</label>
-        <label><input type="checkbox" value="🏠 Aktivitäten im Haushalt"> Aktivitäten im Haushalt</label>
-        <label><input type="checkbox" value="🚦 Regeln in Verkehr und Umwelt"> Regeln in Verkehr und Umwelt</label>
-        <label><input type="checkbox" value="🧭 Himmelsrichtungen"> Himmelsrichtungen</label>
-        <label><input type="checkbox" value="🎉 Feste"> Feste</label>
+        <div id="topic-filter" class="collapsed">
+          <button id="clear-all-btn" type="button" aria-label="Clear all topic filters">Clear All</button>
+          <div class="checkbox-list">
+            <label><input type="checkbox" value="👚 Kleidung"> Kleidung</label>
+            <label><input type="checkbox" value="🛋️ Möbel"> Möbel</label>
+            <label><input type="checkbox" value="⚽ Freizeitaktivitäten"> Freizeitaktivitäten</label>
+            <label><input type="checkbox" value="🏢 Büro"> Büro</label>
+            <label><input type="checkbox" value="💻 Computer"> Computer</label>
+            <label><input type="checkbox" value="🚗 Verkehrsmittel"> Verkehrsmittel</label>
+            <label><input type="checkbox" value="✈️ Reisen"> Reisen</label>
+            <label><input type="checkbox" value="🍏 Lebensmittel und Speisen"> Lebensmittel und Speisen</label>
+            <label><input type="checkbox" value="🦵 Körperteile"> Körperteile</label>
+            <label><input type="checkbox" value="👩‍🦰 Aussehen"> Aussehen</label>
+            <label><input type="checkbox" value="👤 Charakter"> Charakter</label>
+            <label><input type="checkbox" value="🏠 Aktivitäten im Haushalt"> Aktivitäten im Haushalt</label>
+            <label><input type="checkbox" value="🚦 Regeln in Verkehr und Umwelt"> Regeln in Verkehr und Umwelt</label>
+            <label><input type="checkbox" value="🧭 Himmelsrichtungen"> Himmelsrichtungen</label>
+            <label><input type="checkbox" value="🎉 Feste"> Feste</label>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
-
-
-
-  <div style="text-align:center; margin: 1rem 0;">
-    <input
-      type="text"
-      id="search-input"
-      placeholder="Wort suchen …"
-      style="padding: 0.5rem 1rem; font-size: 1rem; border-radius: 8px; width: 80%; max-width: 300px;"
-    />
-  </div>
-
 
   <div id="card-container">
     <div id="card" tabindex="0" role="button" aria-pressed="false" aria-label="Flashcard. Tap to flip.">
@@ -64,14 +58,14 @@
     </div>
   </div>
 
-  <div style="text-align:center; margin: 1rem 0;">
+  <div id="bottom-controls">
     <label class="switch">
       <input type="checkbox" id="difficult-toggle" onchange="toggleMark(currentCard.word)">
       <span class="slider round"></span>
     </label>
-  </div>
 
-  <img id="reset-icon" src="arrow.png" alt="Reset marked" title="Reset marked words" class="reset-icon">
+    <img id="reset-icon" src="arrow.png" alt="Reset marked" title="Reset marked words" class="reset-icon">
+  </div>
 
 
 
