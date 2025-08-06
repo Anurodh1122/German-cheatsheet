@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  
 
   // ===== Back Buttons =====
   document.querySelectorAll('.back-btn').forEach(button => {

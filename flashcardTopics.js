@@ -1,6 +1,6 @@
 const flashcardTopics = [
   {
-    topic: "🛋️ Möbel",
+    topic: "Möbel",
     cards: [
       { article: "das", word: "Sofa", plural: "Sofas", meaning: "Sofa" },
       { article: "der", word: "Schrank", plural: "Schränke", meaning: "Wardrobe" },
@@ -20,7 +20,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "👚 Kleidung",
+    topic: "Kleidung",
     cards: [
       { article: "die", word: "Jacke", plural: "Jacken", meaning: "Jacket" },
       { article: "das", word: "Hemd", plural: "Hemden", meaning: "Shirt" },
@@ -40,7 +40,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "⚽ Freizeitaktivitäten",
+    topic: "Freizeitaktivitäten",
     cards: [
       { article: "das", word: "Spiel", plural: "Spiele", meaning: "Game" },
       { article: "der", word: "Sport", plural: "Sportarten", meaning: "Sport" },
@@ -60,7 +60,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🏢 Büro",
+    topic: "Büro",
     cards: [
       { article: "der", word: "Computer", plural: "Computer", meaning: "Computer" },
       { article: "der", word: "Schreibtisch", plural: "Schreibtische", meaning: "Desk" },
@@ -80,7 +80,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "💻 Computer",
+    topic: "Computer",
     cards: [
       { article: "der", word: "Bildschirm", plural: "Bildschirme", meaning: "Monitor" },
       { article: "die", word: "Tastatur", plural: "Tastaturen", meaning: "Keyboard" },
@@ -100,7 +100,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🚗 Verkehrsmittel",
+    topic: "Verkehrsmittel",
     cards: [
       { article: "das", word: "Fahrrad", plural: "Fahrräder", meaning: "Bicycle" },
       { article: "der", word: "Bus", plural: "Busse", meaning: "Bus" },
@@ -118,7 +118,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "✈️ Reisen",
+    topic: "Reisen",
     cards: [
       { article: "das", word: "Hotel", plural: "Hotels", meaning: "Hotel" },
       { article: "der", word: "Flughafen", plural: "Flughäfen", meaning: "Airport" },
@@ -135,7 +135,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🍏 Lebensmittel und Speisen",
+    topic: "Lebensmittel und Speisen",
     cards: [
       { article: "das", word: "Brot", plural: "Brote", meaning: "Bread" },
       { article: "die", word: "Milch", plural: "-", meaning: "Milk" },
@@ -155,7 +155,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🦵 Körperteile",
+    topic: "Körperteile",
     cards: [
       { article: "der", word: "Arm", plural: "Arme", meaning: "Arm" },
       { article: "das", word: "Bein", plural: "Beine", meaning: "Leg" },
@@ -171,7 +171,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "👩‍🦰 Aussehen",
+    topic: "Aussehen",
     cards: [
       { article: "die", word: "Haarfarbe", plural: "-", meaning: "Hair Color" },
       { article: "das", word: "Gesicht", plural: "Gesichter", meaning: "Face" },
@@ -186,7 +186,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "👤 Charakter",
+    topic: "Charakter",
     cards: [
       { article: "der", word: "Freund", plural: "Freunde", meaning: "Friend" },
       { article: "die", word: "Freundlichkeit", plural: "-", meaning: "Kindness" },
@@ -201,7 +201,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🏠 Aktivitäten im Haushalt",
+    topic: "Aktivitäten im Haushalt",
     cards: [
       { article: "das", word: "Putzen", plural: "-", meaning: "Cleaning" },
       { article: "das", word: "Kochen", plural: "-", meaning: "Cooking" },
@@ -221,7 +221,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🚦 Regeln in Verkehr und Umwelt",
+    topic: "Regeln in Verkehr und Umwelt",
     cards: [
       { article: "das", word: "Tempo", plural: "-", meaning: "Speed" },
       { article: "die", word: "Ampel", plural: "Ampeln", meaning: "Traffic Light" },
@@ -241,7 +241,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🧭 Himmelsrichtungen",
+    topic: "Himmelsrichtungen",
     cards: [
       { article: "der", word: "Norden", plural: "-", meaning: "North" },
       { article: "der", word: "Süden", plural: "-", meaning: "South" },
@@ -258,7 +258,7 @@ const flashcardTopics = [
     ]
   },
   {
-    topic: "🎉 Feste",
+    topic: "Feste",
     cards: [
       { article: "das", word: "Weihnachten", plural: "-", meaning: "Christmas" },
       { article: "das", word: "Geburtstag", plural: "Geburtstage", meaning: "Birthday" },
